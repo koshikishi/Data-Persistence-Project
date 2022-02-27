@@ -16,26 +16,25 @@ public class MenuUIHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (DataManager.Instance.BestScore.Name != null)
+        if (DataManager.Instance.ScoreList.Count != 0)
         {
-            DataManager.Instance.UpdateBestScoreText(bestScoreText);
+            DataManager.Instance.UpdateBestScore(bestScoreText);
             bestScoreText.gameObject.SetActive(true);
-
-            inputField.text = DataManager.Instance.CurrentPlayer;
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        inputField.text = DataManager.Instance.CurrentPlayer;
     }
 
     // Load the main scene
     public void StartNew()
     {
         DataManager.Instance.CurrentPlayer = inputField.text == "" ? "Noname" : inputField.text;
+        SceneManager.LoadScene(2);
+    }
 
+    // Load the top score scene
+    public void GoToScore()
+    {
         SceneManager.LoadScene(1);
     }
 

@@ -38,9 +38,9 @@ public class MainManager : MonoBehaviour
             }
         }
 
-        if (DataManager.Instance.BestScore.Name != null)
+        if (DataManager.Instance.ScoreList.Count != 0)
         {
-            DataManager.Instance.UpdateBestScoreText(BestScoreText);
+            DataManager.Instance.UpdateBestScore(BestScoreText);
         }
     }
 
@@ -86,12 +86,8 @@ public class MainManager : MonoBehaviour
         m_GameOver = true;
         GameOverText.SetActive(true);
 
-        if (DataManager.Instance.BestScore.Value < m_Points)
-        {
-            DataManager.Instance.UpdateBestScore(m_Points);
-            DataManager.Instance.UpdateBestScoreText(BestScoreText);
-        }
-
+        DataManager.Instance.UpdateScoreList(m_Points);
+        DataManager.Instance.UpdateBestScore(BestScoreText);
         DataManager.Instance.SaveScore();
     }
 }

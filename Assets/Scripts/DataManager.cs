@@ -8,8 +8,6 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager Instance { get; private set; }
 
-    public string CurrentPlayer;
-
     [System.Serializable]
     public class ScoreEntry
     {
@@ -17,7 +15,10 @@ public class DataManager : MonoBehaviour
         public int Value;
     }
 
-    public ScoreEntry BestScore;
+    public string CurrentPlayer;
+    public List<ScoreEntry> ScoreList;
+
+    private const int ScoreListMaxCount = 5;
 
     private void Awake()
     {
@@ -31,45 +32,62 @@ public class DataManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        BestScore = new ScoreEntry();
+        ScoreList = new List<ScoreEntry>();
         LoadScore();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void UpdateScoreList(int value)
     {
-        
+        if (ScoreList.Exists(i => i.Name == CurrentPlayer))
+        {
+            int index = ScoreList.FindIndex(i => i.Name == CurrentPlayer);
+
+            if (ScoreList[index].Value < value)
+            {
+                ScoreList[index].Value = value;
+                ScoreListSort();
+            }
+
+            return;
+        }
+
+        ScoreEntry scoreEntry = new ScoreEntry
+        {
+            Name = CurrentPlayer,
+            Value = value
+        };
+
+        if (ScoreList.Count < ScoreListMaxCount)
+        {
+            ScoreList.Add(scoreEntry);
+            ScoreListSort();
+        }
+        else if (ScoreList[ScoreList.Count - 1].Value < value)
+        {
+            ScoreList[ScoreList.Count - 1] = scoreEntry;
+            ScoreListSort();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateBestScore(Text text)
     {
-        
-    }
-
-    public void UpdateBestScore(int value)
-    {
-        BestScore.Name = CurrentPlayer;
-        BestScore.Value = value;
-    }
-
-    public void UpdateBestScoreText(Text text)
-    {
-        text.text = $"BEST SCORE : {BestScore.Name} : {BestScore.Value}";
+        text.text = $"BEST SCORE : {ScoreList[0].Name} : {ScoreList[0].Value}";
     }
 
     [System.Serializable]
     class SaveData
     {
         public string LastPlayer;
-        public ScoreEntry BestScore;
+        public List<ScoreEntry> ScoreList;
     }
 
     public void SaveScore()
     {
-        SaveData data = new SaveData();
-        data.LastPlayer = CurrentPlayer;
-        data.BestScore = BestScore;
+        SaveData data = new SaveData
+        {
+            LastPlayer = CurrentPlayer,
+            ScoreList = ScoreList
+        };
 
         string json = JsonUtility.ToJson(data);
 
@@ -86,7 +104,15 @@ public class DataManager : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
             CurrentPlayer = data.LastPlayer;
-            BestScore = data.BestScore;
+            ScoreList = data.ScoreList;
         }
+    }
+
+    void ScoreListSort()
+    {
+        ScoreList.Sort(delegate (ScoreEntry x, ScoreEntry y)
+        {
+            return y.Value.CompareTo(x.Value);
+        });
     }
 }
