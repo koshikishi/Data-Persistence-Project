@@ -91,5 +91,7 @@ public class MainManager : MonoBehaviour
             DataManager.Instance.UpdateBestScore(m_Points);
             DataManager.Instance.UpdateBestScoreText(BestScoreText);
         }
+
+        DataManager.Instance.SaveScore();
     }
 }

@@ -20,6 +20,8 @@ public class MenuUIHandler : MonoBehaviour
         {
             DataManager.Instance.UpdateBestScoreText(bestScoreText);
             bestScoreText.gameObject.SetActive(true);
+
+            inputField.text = DataManager.Instance.CurrentPlayer;
         }
     }
 
