@@ -14,10 +14,10 @@ public class MainManager : MonoBehaviour
     public Text BestScoreText;
     public GameObject StartHintText;
     public GameObject GameOverText;
-    
+
     private bool m_Started = false;
     private int m_Points;
-    
+
     private bool m_GameOver = false;
 
     // Start is called before the first frame update
@@ -25,7 +25,7 @@ public class MainManager : MonoBehaviour
     {
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
-        
+
         int[] pointCountArray = new [] {1,1,2,2,5,5};
         for (int i = 0; i < LineCount; ++i)
         {
@@ -56,7 +56,7 @@ public class MainManager : MonoBehaviour
                 forceDir.Normalize();
 
                 Ball.transform.SetParent(null);
-                Ball.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
+                Ball.AddForce(forceDir * (SettingsManager.Instance.BallSpeed * 2 / 3), ForceMode.VelocityChange);
 
                 StartHintText.SetActive(false);
             }

@@ -18,7 +18,7 @@ public class DataManager : MonoBehaviour
     public string CurrentPlayer;
     public List<ScoreEntry> ScoreList;
 
-    private const int ScoreListMaxCount = 5;
+    const int ScoreListMaxCount = 5;
 
     private void Awake()
     {

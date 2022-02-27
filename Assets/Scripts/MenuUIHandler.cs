@@ -29,13 +29,19 @@ public class MenuUIHandler : MonoBehaviour
     public void StartNew()
     {
         DataManager.Instance.CurrentPlayer = inputField.text == "" ? "Noname" : inputField.text;
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 
     // Load the top score scene
     public void GoToScore()
     {
         SceneManager.LoadScene(1);
+    }
+
+    // Load the settings scene
+    public void GoToSettings()
+    {
+        SceneManager.LoadScene(2);
     }
 
     // Exit the application
