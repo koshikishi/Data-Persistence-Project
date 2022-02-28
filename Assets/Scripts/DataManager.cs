@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +9,7 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager Instance { get; private set; }
 
-    [System.Serializable]
+    [Serializable]
     public class ScoreEntry
     {
         public string Name;
@@ -74,7 +75,7 @@ public class DataManager : MonoBehaviour
         text.text = $"BEST SCORE : {ScoreList[0].Name} : {ScoreList[0].Value}";
     }
 
-    [System.Serializable]
+    [Serializable]
     class SaveData
     {
         public string LastPlayer;

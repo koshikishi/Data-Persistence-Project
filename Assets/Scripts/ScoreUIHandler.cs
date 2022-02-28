@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 [DefaultExecutionOrder(1000)]
-public class ScoreUIHandler : MonoBehaviour
+public class ScoreUIHandler : UIHandler
 {
     public Text ScorePrefab;
     public GameObject ScoreContainer;
@@ -19,12 +19,6 @@ public class ScoreUIHandler : MonoBehaviour
             scoreText.text = $"{DataManager.Instance.ScoreList[i].Name} : {DataManager.Instance.ScoreList[i].Value}";
             scoreText.transform.SetParent(ScoreContainer.transform);
         }
-    }
-
-    // Load the main menu scene
-    public void GoToMenu()
-    {
-        SceneManager.LoadScene(0);
     }
 
     // Clear the scole list

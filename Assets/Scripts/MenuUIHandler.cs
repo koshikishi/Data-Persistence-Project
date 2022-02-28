@@ -8,7 +8,7 @@ using UnityEditor;
 #endif
 
 [DefaultExecutionOrder(1000)]
-public class MenuUIHandler : MonoBehaviour
+public class MenuUIHandler : UIHandler
 {
     public InputField inputField;
     public Text bestScoreText;
@@ -30,18 +30,6 @@ public class MenuUIHandler : MonoBehaviour
     {
         DataManager.Instance.CurrentPlayer = inputField.text == "" ? "Noname" : inputField.text;
         SceneManager.LoadScene(3);
-    }
-
-    // Load the top score scene
-    public void GoToScore()
-    {
-        SceneManager.LoadScene(1);
-    }
-
-    // Load the settings scene
-    public void GoToSettings()
-    {
-        SceneManager.LoadScene(2);
     }
 
     // Exit the application

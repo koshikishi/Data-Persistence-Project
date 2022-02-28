@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -27,7 +28,7 @@ public class SettingsManager : MonoBehaviour
         LoadSettings();
     }
 
-    [System.Serializable]
+    [Serializable]
     class SaveData
     {
         public float BallSpeed;

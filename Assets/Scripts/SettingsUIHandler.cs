@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 [DefaultExecutionOrder(1000)]
-public class SettingsUIHandler : MonoBehaviour
+public class SettingsUIHandler : UIHandler
 {
     public Slider ballSpeedSlider;
     public Slider paddleSpeedSlider;
@@ -16,12 +15,6 @@ public class SettingsUIHandler : MonoBehaviour
         // Load settings
         ballSpeedSlider.value = SettingsManager.Instance.BallSpeed;
         paddleSpeedSlider.value = SettingsManager.Instance.PaddleSpeed;
-    }
-
-    // Load the main menu scene
-    public void GoToMenu()
-    {
-        SceneManager.LoadScene(0);
     }
 
     // Save settings
